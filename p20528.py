@@ -1,5 +1,5 @@
 # 20528번 문제
-# https://www.acmicpc.net/problem/20529
+# https://www.acmicpc.net/problem/20528
 
 
 def p20528():
