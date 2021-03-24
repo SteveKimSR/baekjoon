@@ -1,36 +1,33 @@
-def solve(p):
-    if check(p):
-        if p[0][0]:
-            global b
-            b += 1
-        else:
-            global w
-            w += 1
-    else:
-        for i in divide(p):
-            solve(i)
+global w, b
+w, b = 0, 0
 
 
 def check(p):
-    for i in p:
-        for j in i:
-            if j != p[0][0]:
+    for i in range(len(p)):
+        for j in range(len(p)):
+            if p[i][j] != p[0][0]:
                 return False
     return True
 
 
 def divide(p):
-    length = int(len(p) / 2)
-    a = [i[:length] for i in p[:length]]
-    b = [i[length:] for i in p[:length]]
-    c = [i[:length] for i in p[length:]]
-    d = [i[length:] for i in p[length:]]
-    return a, b, c, d
+    half = int(len(p) / 2)
+    return [i[:half] for i in p[:half]], [i[half:] for i in p[:half]], \
+           [i[:half] for i in p[half:]], [i[half:] for i in p[half:]]
 
 
-paper = []
-w, b = 0, 0
-for _ in range(int(input())):
-    paper.append(list(map(int, input().split())))
-solve(paper)
-print(f'{w}\n{b}')
+def do(p):
+    global w, b
+    if check(p):
+        if p[0][0]:
+            b += 1
+        else:
+            w += 1
+    else:
+        for i in divide(p):
+            do(i)
+
+
+do([list(map(int, input().split())) for _ in range(int(input()))])
+print(w)
+print(b)
